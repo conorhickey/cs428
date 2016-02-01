@@ -4,7 +4,7 @@ CFLAGS = -Wall
 all: imt2b zoom
 
 %.o: %.c
-	gcc ${CFLAGS} -c -o $@ $<
+	gcc ${DFLAGS} -c -o $@ $<
 
 
 imt2b: imt2b.o image.o

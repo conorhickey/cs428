@@ -40,7 +40,10 @@ int main(int argc, char *argv[])
     }
 
 	inf = fopen(argv[0],"r");
+	printf("%s \n",argv[0]);
+	printf("%s \n",argv[1]);
 	if (inf == NULL){
+	
 	printf("No open FIle \n");
 	} 
 

@@ -29,7 +29,8 @@ int imtread(FILE *fp, struct image *im)
 	for(i=0; i<(im->rows)*(im->cols); i++){
 	
 	fscanf(fp," (%hu, %hu, %hu, %hu) ", &pixP->r, &pixP->g, &pixP->b, &pixP->a);
-	//printf(" (%hu, %hu, %hu, %hu) ", pixP->r, pixP->g, pixP->b, pixP->a);
+	printf(" (%hu, %hu, %hu, %hu) ", pixP->r, pixP->g, pixP->b, pixP->a);
+	
 	pixP++;
 	}
 
@@ -40,8 +41,6 @@ int imtread(FILE *fp, struct image *im)
 /* Write a file in textual format. Return 0 on success, -1 on failure. */
 int imtwrite(FILE *fp, struct image *im)
 {
-	
 	return 0;
-
-
+    /* Your code here! */
 }
