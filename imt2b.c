@@ -12,9 +12,9 @@ void usage(void)
 int main(int argc, char *argv[])
 {
 	FILE *inf, *outf;
-    char ch;
+    	char ch;
 	bool reverse = false;
-	int check;
+
 	struct image img;
 
 
@@ -48,17 +48,14 @@ int main(int argc, char *argv[])
 	if (outf == NULL){
 	printf("No out FIle \n");
 	} 
-
-	check = (imtread(inf,&img));
 	
-    /*if (reverse){
-
+    if (reverse){
+	return 0;
 	}
 	else{
-	if (imtread(inf,&img) == -1){
-		printf("Error");
-		}
-	}*/
+	imtread(inf,&img);
+	imtwrite(outf,&img);
+	}
 
 	return 0;
 }
