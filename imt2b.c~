@@ -50,10 +50,15 @@ int main(int argc, char *argv[])
 	} 
 	
     if (reverse){
+    printf("Textual in Binary Out.\n");
+    imtread(inf,&img);
+	imbwrite(outf,&img);
 	return 0;
 	}
 	else{
-	imtread(inf,&img);
+	printf("Binary in Textual Out.\n");
+	imbread(inf,&img);
+	imtwrite(outf,&img);
 	}
 
 	return 0;

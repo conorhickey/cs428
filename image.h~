@@ -28,8 +28,6 @@ int imbread(FILE *fp, struct image *im);
 /* Write a file in binary format. Return 0 on success, -1 on failure. */
 int imbwrite(FILE *fp, struct image *im);
 
-int imbzoomwrite(FILE *fp, struct image *im, int factor);
-
 /* Read a file in textual format. Return 0 on success, -1 on failure. */
 int imtread(FILE *fp, struct image *im);
 

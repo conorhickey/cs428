@@ -42,18 +42,24 @@ int main(int argc, char *argv[])
 	inf = fopen(argv[0],"r");
 	if (inf == NULL){
 	printf("No open FIle \n");
+	exit(0);
 	} 
 
 	outf = fopen(argv[1],"w");
 	if (outf == NULL){
 	printf("No out FIle \n");
+	exit(0);
 	} 
 	
     if (reverse){
+    printf("Textual in Binary Out.\n");
+    imtread(inf,&img);
+	imbwrite(outf,&img);
 	return 0;
 	}
 	else{
-	imtread(inf,&img);
+	printf("Binary in Textual Out.\n");
+	imbread(inf,&img);
 	imtwrite(outf,&img);
 	}
 

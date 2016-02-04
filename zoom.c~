@@ -70,9 +70,9 @@ int imbzoomwrite(FILE *fp, struct image *im,int factor)
 	struct pixel *pixP;
 	pixP = im->pixbuf;
 	
-	for(z=0; z< (im->rows);z++){
-		for(i= 0; i < (im->cols*factor); i++){
-		pixP = im->pixbuf;
+	//for(z=0; z< (im->rows);z++){
+		for(i= 0; i < (im->cols*rows*factor); i++){
+		pixP= im->pixbuf;
 		pixP= pixP+i;
 			for(j=0; j <factor;j++){
 				printf("%d\n",j);
@@ -86,7 +86,7 @@ int imbzoomwrite(FILE *fp, struct image *im,int factor)
 				fwrite(&temp,2,1,fp);
 			}
 		}
-	}
+	//}
 	
 	return 0;
 }
