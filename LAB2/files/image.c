@@ -16,9 +16,14 @@ int imbread(FILE *fp, struct image *im)
 	return -1;
 	}
 	fread(&rows,4,1,fp);
+	rows = be32toh(rows);
+
 	fread(&cols,4,1,fp);
+	cols = be32toh(cols);
 	struct pixel *pixP;
 	im->rows = rows, im->cols = cols; 
+	printf("%d\n",im->rows);
+	printf("%d\n",im->cols);
 	im->pixbuf = malloc((im->rows)*(im->cols)*sizeof(struct pixel));
 	pixP = im->pixbuf;
 	
@@ -46,6 +51,8 @@ int imbwrite(FILE *fp, struct image *im)
 	uint16_t temp;
 
 	uint32_t rows = im->rows, cols = im->cols; 
+	rows = htobe32(im->rows);
+	cols = htobe32(im->cols);
 	uint64_t farb = htobe64(0x6661726266656c64);
 	fwrite(&farb,8,1,fp);
 	fwrite(&rows,4,1,fp);

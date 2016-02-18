@@ -6,26 +6,31 @@
 /* in:  original image */
 /* out: sepia image    */
 void sepia(struct image *im, struct image *sim)
-{
+{	int c = 2000 *2000;
+	printf("%d\n",c);
     int i;
-    uint16_t temp;
+    uint32_t temp;
     sim->rows= im->rows;
     sim->cols= im->cols;
-    
+
     sim->pixbuf = malloc((im->rows)*(im->cols)*sizeof(struct pixel));
-    
+
     struct pixel *pixSimP,*pixP;
 	pixP = im->pixbuf;
 	pixSimP = sim->pixbuf;
-    
-    for(i=0;i<(im->rows)*(im->cols);i++){
+
+	printf("%d\n",sim->rows);
+	printf("%d\n",sim->cols);
+
+    for(i=0;i<((im->rows)*(im->cols));i++){
+
     	
     	temp = 0.393*pixP->r + 0.769*pixP->g + 0.189*pixP->b;
     	if(temp > 65535){
     	pixSimP->r = 65535;
     	}
     	else{
-    	pixSimP->r = 0.393*pixP->r + 0.769*pixP->g + 0.189*pixP->b;
+    	pixSimP->r =temp;
     	}
     	
     	temp = 0.349*pixP->r + 0.686*pixP->g + 0.168*pixP->b;
@@ -33,7 +38,7 @@ void sepia(struct image *im, struct image *sim)
     	pixSimP->g = 65535;
     	}
     	else{
-    	pixSimP->g = 0.349*pixP->r + 0.686*pixP->g + 0.168*pixP->b;
+    	pixSimP->g = temp;
     	}
     	
     	temp = 0.272*pixP->r + 0.534*pixP->g + 0.131*pixP->b;
@@ -41,9 +46,9 @@ void sepia(struct image *im, struct image *sim)
     	pixSimP->b = 65535;
     	}
     	else{
-    	pixSimP->b = 0.272*pixP->r + 0.534*pixP->g + 0.131*pixP->b;
+    	pixSimP->b = temp;
     	}
-    	
+    	pixSimP->a = pixP->a;
     	pixP++;
     	pixSimP++;
     }

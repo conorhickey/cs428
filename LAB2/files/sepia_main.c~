@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "image.h"
 
 void usage(void)
@@ -11,6 +12,10 @@ void usage(void)
 int main(int argc, char **argv)
 {
     struct image im, sim;
+    struct timespec start, end;
+    double accum;
+
+    FILE *inf, *outf;
 
     if (argc != 3) {
         usage();
@@ -21,17 +26,20 @@ int main(int argc, char **argv)
     if (strlen(argv[1]) == 1 && argv[1][0] == '-') {
         inf  = stdin;
     } else {
-        inf = fopen(argv[1], 'r');
+        inf = fopen(argv[1], "r");
     }
 
     if (strlen(argv[1]) == 1 && argv[1][0] == '-') {
         outf = stdout;
     } else {
-        inf = fopen(argv[2], 'w');
+        outf = fopen(argv[2], "w");
     }
 
     /* read file */
     imbread(inf, &im);
+	printf("sepia main\n");
+	printf("%d\n",im.rows);
+	printf("%d\n",im.cols);
 
     /* timing */
     clock_gettime(CLOCK_REALTIME, &start);

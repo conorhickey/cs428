@@ -38,6 +38,7 @@ int main(int argc, char **argv)
     /* read file */
     imbread(inf, &im);
 
+
     /* timing */
     clock_gettime(CLOCK_REALTIME, &start);
 
