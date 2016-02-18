@@ -52,7 +52,7 @@ int imbwrite(FILE *fp, struct image *im)
 
 	uint32_t rows = im->rows, cols = im->cols; 
 	rows = htobe32(im->rows);
-	cols = htobe32(im->cols)
+	cols = htobe32(im->cols);
 	uint64_t farb = htobe64(0x6661726266656c64);
 	fwrite(&farb,8,1,fp);
 	fwrite(&rows,4,1,fp);

@@ -22,8 +22,7 @@ int imbread(FILE *fp, struct image *im)
 	cols = be32toh(cols);
 	struct pixel *pixP;
 	im->rows = rows, im->cols = cols; 
-	printf("%d\n",im->rows);
-	printf("%d\n",im->cols);
+
 	im->pixbuf = malloc((im->rows)*(im->cols)*sizeof(struct pixel));
 	pixP = im->pixbuf;
 	

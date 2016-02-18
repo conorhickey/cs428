@@ -6,8 +6,7 @@
 /* in:  original image */
 /* out: sepia image    */
 void sepia(struct image *im, struct image *sim)
-{	int c = 2000 *2000;
-	printf("%d\n",c);
+{
     int i;
     uint32_t temp;
     sim->rows= im->rows;
@@ -19,20 +18,18 @@ void sepia(struct image *im, struct image *sim)
 	pixP = im->pixbuf;
 	pixSimP = sim->pixbuf;
 
-	printf("%d\n",sim->rows);
-	printf("%d\n",sim->cols);
 
     for(i=0;i<((im->rows)*(im->cols));i++){
 
     	
-    	temp = 0.393*pixP->r + 0.769*pixP->g + 0.189*pixP->b;
+    	temp = 0.393*pixP->r + 0.769*pixP->g + 0.189*pixP->b;    	
     	if(temp > 65535){
     	pixSimP->r = 65535;
     	}
     	else{
     	pixSimP->r =temp;
     	}
-    	
+
     	temp = 0.349*pixP->r + 0.686*pixP->g + 0.168*pixP->b;
     	if(temp > 65535){
     	pixSimP->g = 65535;
