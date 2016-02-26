@@ -1,3 +1,4 @@
+//allows the program to compile as C
 extern "C"{
 #include "sepia.h"
 }
@@ -12,13 +13,15 @@ extern "C"{
 /*   c:      number of cols */
 __global__ void sepia_ker(struct pixel *inbuf, struct pixel *outbuf, int r, int c)
 {	
-	int i;
 
+	//Code similar to sequential code excpet it uses a value i calucalted
+	//from 	i = (blockIdx.x * blockDim.x) * threadIdx.x;
+	//inbuf and 
+
+	int i;
 	uint32_t temp;
 	i = (blockIdx.x * blockDim.x) * threadIdx.x;
-	for( ; ; ) {
-      int x = 0;
-	} 
+
 	if(i<r*c){ 
 		temp = 0.393f * inbuf[i].r + 0.769f * inbuf[i].g + 0.189f * inbuf[i].b;    	
 	   	if(temp > 65535){
@@ -56,14 +59,14 @@ __global__ void sepia_ker(struct pixel *inbuf, struct pixel *outbuf, int r, int 
 /* out: sepia image    */
 void sepia(struct image *im, struct image *sim)
 {	
+	//sets up various values and pixels
 	sim->rows= im->rows;
     sim->cols= im->cols;
     struct pixel *dpixSimP,*dpixP;
-    struct pixel *pixSimP,*pixP;
-    printf("%d rows\n",im->rows);
-    printf("%d cols \n",im->cols);
-    
-
+    struct pixel *pixSimP,*pixP;   
+	
+	
+	//used to calculate the threads and block size
     int n = sim->rows * sim->cols;
     int size = n*sizeof(struct pixel);
     int n_threads = 1024;
@@ -72,16 +75,19 @@ void sepia(struct image *im, struct image *sim)
     sim->pixbuf = (struct pixel *)malloc(size);
     pixP = im->pixbuf;
 	pixSimP = sim->pixbuf;
+	
+	//allocates the cuda memory
 	cudaMalloc((void **) &dpixSimP,size);
 	cudaMalloc((void **) &dpixP,size);
 	
+	//copies it to device
 	cudaMemcpy(dpixP,im->pixbuf,size,cudaMemcpyHostToDevice);
-	//sepia_ker<<<n_blocks,n_threads>>>(im->pixbuf,sim->pixbuf,im->rows,im->cols);
-	sepia_ker<<<30,30>>>(im->pixbuf,sim->pixbuf,im->rows,im->cols);
+	sepia_ker<<<n_blocks,n_threads>>>(im->pixbuf,sim->pixbuf,im->rows,im->cols);
 	
+	//copies output from device to host
 	cudaMemcpy(sim->pixbuf, dpixSimP, size,cudaMemcpyDeviceToHost);
 	
-	
+	//Frees up the memory 
 	cudaFree(dpixSimP);
 	cudaFree(dpixP);
 	
