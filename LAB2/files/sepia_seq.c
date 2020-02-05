@@ -23,7 +23,7 @@ void sepia(struct image *im, struct image *sim)
 
     	//sets a temp as the value of the pixel colour given the formula
     	temp = 0.393*pixP->r + 0.769*pixP->g + 0.189*pixP->b;    	
-    	//if max value exceded make max value
+    	//if max value exceeded make max value
     	if(temp > 65535){
     	pixSimP->r = 65535;
     	}
